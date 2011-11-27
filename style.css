@@ -1,0 +1,61 @@
+BODY{
+    font-size: 12px;
+    font-family: Arial;
+    line-height: 1.9em;
+    padding: 2em;
+}
+
+A{
+    color: #ff4000;
+    margin: -3px;
+    padding: 3px;
+    text-decoration: none;
+}
+A:hover{
+    background-color: #333;
+    color: #fff;
+}
+H2, H3
+{
+    margin: 1.5em 0 1em;
+}
+
+.LogPanel{
+    font-size: 10px;
+}
+.LithronLogTable{
+    border-width: 0;
+    font-size: 10px;
+}
+.LithronLogTable THEAD{
+    font-weight: bold;
+}
+.LithronLogTable TD{
+    padding: 2px;
+    border: 0px dashed black;
+}
+.LithronLogTable TR{
+    background: #eee;
+}
+.LogPanel .levelerror{
+    background: red;
+    color: white;
+}
+.LogPanel .levelwarning{
+    background: orange;
+}
+.LogPanel .levelinfo{
+    background: green;
+    color: white;
+}
+
+.DebugPanel {
+    background: #eee;
+    max-height: 400px;
+    overflow: auto;
+    padding: 1em;
+    font-size: 11px;
+    font-family: monospace;
+    white-space: pre;
+}
+

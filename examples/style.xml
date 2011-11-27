@@ -1,0 +1,33 @@
+<style>
+	page.A4 {
+            height: 297mm;
+            width: 210mm
+        }
+
+        wrapper {
+            display: block;
+            margin-top: 2cm;
+            margin-right: 3cm;
+            margin-bottom: 2cm;
+            margin-left: 2cm;
+        }
+
+	p {
+            font-weight: light;
+            font-size: 8pt;
+            margin-top: 0.25cm;
+            margin-bottom: 0.25cm;
+        }
+
+        img
+        {
+            display: block;
+            width: 100%;
+        }
+
+        img.half
+        {
+            width: 50%;
+        }
+
+</style>
