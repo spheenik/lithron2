@@ -1,0 +1,6 @@
+[submodule "lithron/phathom"]
+	path = lithron/phathom
+	url = git@github.com:spheenik/phathom-lib.git
+[submodule "lithron/css"]
+	path = lithron/css
+	url = git@github.com:spheenik/phathom-css-lib.git
