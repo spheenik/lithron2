@@ -100,22 +100,21 @@ class LithronSource {
             fclose($fh);
             if (isset($ret)) return $ret;
         }
-        ob_start();
-        $l = new csslex($css);
-        $p = new cssparse($l);
-        //$p->setdebug(1);
-        $p->yyparse();
-        ob_end_clean();
-        file_put_contents($name, CSS::HASH.serialize($p->parseResult()));
-        //var_dump($p->parseResult());
-        return $p->parseResult();
+        //ob_start();
+        $c = new StringContext($css);
+        CSSParser::run("S", $c);
+        //ob_end_clean();
+        $result = $c->pop();
+        //var_dump($result);
+        file_put_contents($name, CSS::HASH.serialize($result));
+        return $result;
     }
 
     private function applyCSS($root, $css, $prefix, $baseSpec) {
 
         foreach($css->values as $ruleSet)
             foreach($ruleSet->declarations->values as $decl)
-                if ($decl->attributes === null) {
+                if ($decl->resolved === null) {
                     $msg = $decl->property->toString().": ".$decl->expression->toString(" ");
                    $this->logger->warn("ignoring invalid css declaration $msg in selector ".$ruleSet->selectors->toString(" | "));
                 }
@@ -135,9 +134,9 @@ class LithronSource {
                 foreach($nodes as $node) {
                     foreach($ruleSet->declarations->values as $decl) {
                         // attributes is null if it is not valid
-                        if ($decl->attributes === null) continue;
+                        if ($decl->resolved === null) continue;
                         //echo "assign<br/>";
-                        $node->getAttributes()->queueAttributes($decl->attributes, $spec + $decl->priority*0x10000000);
+                        $node->getAttributes()->queueAttributes($decl->resolved, $spec + $decl->priority*0x10000000);
                     }
                 }
             }

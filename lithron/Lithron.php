@@ -6,17 +6,22 @@ function __autoload($class_name) {
 }
 
 set_include_path(
-    dirname(__FILE__)."/interfaces:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/strategies:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/providers:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/layout:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/layout/decorators:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/renderers:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/visitors:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/css:".DIRECTORY_SEPARATOR.
-    dirname(__FILE__)."/css/grammar:".DIRECTORY_SEPARATOR.
-    get_include_path());
+    dirname(__FILE__)."/interfaces".PATH_SEPARATOR.
+    dirname(__FILE__)."/strategies".PATH_SEPARATOR.
+    dirname(__FILE__)."/providers".PATH_SEPARATOR.
+    dirname(__FILE__)."/layout".PATH_SEPARATOR.
+    dirname(__FILE__)."/layout/decorators".PATH_SEPARATOR.
+    dirname(__FILE__)."/renderers".PATH_SEPARATOR.
+    dirname(__FILE__)."/visitors".PATH_SEPARATOR.
+    dirname(__FILE__)."/phathom".PATH_SEPARATOR.
+	dirname(__FILE__)."/css".PATH_SEPARATOR.
+	get_include_path());
 
+$specPath = ValidationGenerator::generate(array("lithron"), dirname(__FILE__)."/../output");
+
+set_include_path(
+	$specPath.PATH_SEPARATOR.
+	get_include_path());
 
 class Lithron {
 
