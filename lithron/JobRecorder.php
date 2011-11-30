@@ -19,7 +19,7 @@ class JobRecorder {
     protected $currentPage = null;
     protected $elementStack = null;
 
-    protected $relativePrefix = "output";
+    protected $relativePrefix;
     protected $absolutePrefix;
     protected $webDir;
 
@@ -31,13 +31,15 @@ class JobRecorder {
         //$this->estimator = new PDFlibRenderer($this);
         //$this->estimator->beginDocument("");
 
-        $this->relativePrefix = $this->relativePrefix.DIRECTORY_SEPARATOR.$this->jobId;
-        $this->absolutePrefix = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR.$this->relativePrefix;
+        $suffix = DIRECTORY_SEPARATOR."jobs".DIRECTORY_SEPARATOR.$this->jobId;
+        $this->relativePrefix = Lithron::getRelativeOutputPath().$suffix;
+        $this->absolutePrefix = Lithron::getAbsoluteOutputPath().$suffix;
         $this->webPrefix = $this->relativePrefix;
 
-        @mkdir($this->relativePrefix);
-        if (!is_writable($this->relativePrefix))
-            throw new LithronException("Output-directory is not writable.");
+        @mkdir($this->relativePrefix, 0777, true);
+        if (!is_writable($this->relativePrefix)) {
+        	die("could not create directory '".$this->relativePrefix."'");
+        }
     }
 
     public function getJobId() {

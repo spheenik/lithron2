@@ -23,8 +23,7 @@ class LithronSource {
             throw new LithronException("Can not load XML");
         }
 
-        // make autoload load the tree classes
-        $x = new CSSTree();
+        CSS::initialize();
         $this->logger->stopTimer("total");
     }
 
@@ -91,7 +90,14 @@ class LithronSource {
 
     private function loadCSS($css) {
         $hash = md5($css);
-        $name = "output/css_$hash.ser";
+        
+        $dirOut = Lithron::getRelativeOutputPath().DIRECTORY_SEPARATOR."clean_css";
+        @mkdir($dirOut, 0777, true);
+        if (!is_writable($dirOut)) {
+        	die("could not create directory '$dirOut'");
+        }
+        
+        $name = $dirOut.DIRECTORY_SEPARATOR."$hash.ser";
         if (is_readable($name)) {
             $fh = fopen($name, "r");
             $hash = fread($fh, strlen(CSS::HASH));
