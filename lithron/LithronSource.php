@@ -102,8 +102,11 @@ class LithronSource {
         }
         //ob_start();
         $c = new StringContext($css);
+        //$c->setTracingEnabled(true);
         CSSParser::run("S", $c);
+        //$c->dumpLog();
         //ob_end_clean();
+        //var_dump($c);
         $result = $c->pop();
         //var_dump($result);
         file_put_contents($name, CSS::HASH.serialize($result));
